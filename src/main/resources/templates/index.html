@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homologation SSO Platform</title>
+    <!--    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./js/jquery.backstretch.js"></script>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:"微软雅黑";
+    }
+
+    .main {
+        width: 100vw;
+        height: 100vh;
+        min-width: 1200px;
+        min-height: 600px;
+        /*background-image: url("https://bmbsiplan-nsp-test.cn.isn.corpintra.net/mbc/img/1.jpg");*/
+        /*background-image: url("22C0001_058.jpg");*/
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+
+    .head {
+        color: black;
+        font-weight: bold;
+        padding-left:50px;
+        padding-top: 30px;
+        font-size: 40px;
+    }
+
+    .sub {
+        color: black;
+        font-weight: bold;
+        padding: 10px 50px;
+        font-size: 20px;
+    }
+
+    .button {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 150px;
+        background-color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .button .btn {
+        color: white;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .button .line {
+        width: 3px;
+        height: 100px;
+        background-color: white;
+        border-radius: 1px;
+    }
+
+    .button .btn .top {
+        text-shadow: black 2px -2px 2px;
+        transition: all .2s;
+    }
+
+    .button .btn .bottom {
+        text-shadow: gray 3px -3px 3px;
+        font-size: 22px;
+        font-weight: bold;
+        transition: all .2s;
+    }
+
+    .button .btn:hover .top {
+        font-size: 20px;
+    }
+
+    .button .btn:hover .bottom {
+        font-size: 28px;
+    }
+
+    .mask {
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 10;
+        display: none;
+    }
+
+    .mask .alert {
+        background-color: white;
+        margin: 200px auto;
+        width: 400px;
+        height: 200px;
+        border-radius: 10px;
+        text-align: center;
+        position: relative;
+    }
+
+    .mask .alert p {
+        padding: 50px;
+    }
+
+    .mask .alert .redirect {
+        cursor: pointer;
+        position: absolute;
+        width: 150px;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        bottom: 20px;
+        left: calc(50% - 75px);
+        line-height: 30px;
+    }
+
+    .mask .alert .redirect:hover {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+<body>
+<div class="main">
+    <h1 class="head">Homologation</h1>
+    <h3 class="sub"><i>Welcome to Homologation SSO, please select the module you want to operate.</i></h3>
+    <div class="button">
+        <div class="btn">
+            <!--            <div class="top">NO.1</div>-->
+            <div class="bottom">TD Systems</div>
+        </div>
+        <div class="line"></div>
+        <div class="btn">
+            <!--            <div class="top">NO.2</div>-->
+            <div class="bottom">Defect Report</div>
+        </div>
+        <div class="line"></div>
+        <div class="btn">
+            <!--            <div class="top">NO.3</div>-->
+            <div class="bottom">FC Report</div>
+        </div>
+        <div class="line"></div>
+        <div class="btn">
+            <!--            <div class="top">NO.4</div>-->
+            <div class="bottom">VECC</div>
+        </div>
+        <div class="line"></div>
+        <div class="btn">
+            <!--            <div class="top">NO.5</div>-->
+            <div class="bottom">Custom & Clearance</div>
+        </div>
+        <div class="line"></div>
+        <div class="btn">
+            <!--            <div class="top">NO.6</div>-->
+            <div class="bottom">Budget</div>
+        </div>
+    </div>
+</div>
+
+<div class="mask">
+    <div class="alert">
+        <p>Sorry,you have logged out,please login again.</p>
+        <div class="redirect">Confirm</div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+    var name = "";
+    var sp = "";
+
+    /*
+    var urlList = [
+        "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/vpc/#/Loign?token="+[[${sp}]]+'&name='+[[${name}]],
+        "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/sod/test/loginByToken?jwtToken="+[[${sp}]],
+        "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/west_sod/test/loginByToken?jwtToken="+[[${sp}]],
+        "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/psp/#/Login?token="+[[${sp}]],
+        "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/allocation/dist/cbu/#/?token="+[[${sp}]]+'&name='+[[${name}]],
+        "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/plm/#/login?token="[[${sp}]],
+    ];
+*/
+
+
+    var urlList = [
+        "https://bmbsiplan.cn.isn.corpintra.net/iplan_neo/#/Login?token="+sp+'&name='+name,
+        "https://bmbsiplan-nsp.cn.isn.corpintra.net/sod/test/loginByToken?jwtToken="+sp,
+        "https://bmbsiplan-nsp.cn.isn.corpintra.net/west_sod/test/loginByToken?jwtToken="+sp,
+        "https://bmbsiplan-nsp.cn.isn.corpintra.net/psp/#/Login?token="+sp,
+        "https://bmbsiplan-nsp.cn.isn.corpintra.net/allocation/dist/cbu/#/?token="+sp+'&name='+name,
+        "https://bmbsiplan-nsp.cn.isn.corpintra.net/PLM/#/login?token="+sp,
+    ];
+
+    if (sp != null) {
+        window.localStorage.urlList = JSON.stringify(urlList);
+    }
+
+    $(".btn").click("click", function () {
+        $.ajax({
+            type:"POST",
+            contentType: "application/json;charset=UTF-8",
+            url : "https://bmbsiplan-nsp-test.cn.isn.corpintra.net/mbc/Km/getSession",
+            // url : "https://bmbsiplan.cn.isn.corpintra.net/mbc/Km/getSession",
+            // url : "https://localhost:8089/Km/getSession",
+            success : (result) => {
+                if (result == '0') {
+                    var index = $(this).index() / 2;
+                    if (window.localStorage.urlList) {
+                        urlList = JSON.parse(window.localStorage.urlList);
+                    }
+                    // window.open(urlList[index]);
+                    window.location.href = urlList[index];
+                }else{
+                    $('.mask').css('display', 'block');
+                    window.location.href = 'https://sso-int.daimler.com/as/authorization.oauth2?response_type=code&client_id=f5493201-6fa7-44af-a299-32866269cda1&redirect_uri=https://bmbsiplan-nsp-test.cn.isn.corpintra.net/mbc/Login&scope=openid&state=270537200&nonce=270537200';
+                }
+            },
+            error : function(e){
+                $('.mask').css('display', 'block');
+            }
+        })
+    });
+
+    $('.mask .alert .redirect').click(function() {
+        $('.mask').css('display', 'none');
+    })
+
+    $(".main").backstretch([
+        "img/22C0001_058.jpg",
+        "img/22C0001_063.jpg",
+        "img/22C0001_064.jpg"
+    ], {
+        fade:2000,
+        duration: 6000
+    });
+</script>
+
+</body>
+</html>

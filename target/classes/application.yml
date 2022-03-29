@@ -1,0 +1,19 @@
+server:
+  port: 7070
+  #  servlet:
+  #    context-path: /HSP/login
+  #spring:
+  #  mvc:
+  #    static-path-pattern: /**
+  #    view:
+  #      prefix: /
+  #      suffix: .html
+  #  resources:
+  #    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  #
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
